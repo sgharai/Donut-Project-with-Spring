@@ -15,14 +15,20 @@ public class DonutService {
     @Autowired
     DonutRepo donutRepo;
 
-    public ModelAndView showDonuts() {
-        ModelAndView mav = new ModelAndView("donuts");
-        mav.addObject("donuts", donutRepo.findAll());
-        return mav;
+//    public ModelAndView showDonuts() {
+//        ModelAndView mav = new ModelAndView("donuts");
+//        mav.addObject("donuts", donutRepo.findAll());
+//        return mav;
+//    }
+
+    public Iterable<Donut> getDonuts() {
+        return donutRepo.findAll();
     }
 
-//    public Iterable<Donut> getDonuts() {
-//        return donutRepo.findAll();
+//    public ModelAndView showSingleDonut(Long id) {
+//        ModelAndView mav2 = new ModelAndView("donut");
+//        mav2.addObject("donut", donutRepo.findById(id));
+//        return mav2;
 //    }
 
     public Donut newDonut(@RequestBody Donut newDonut) {
@@ -37,6 +43,7 @@ public class DonutService {
 
     public Optional<Donut> updateDonut(@RequestBody Donut newDonut, @PathVariable Long id) {
         Optional<Donut> updatedDonut = donutRepo.findById(id).map(donut -> {
+            donut.setName(newDonut.getName());
             donut.setFrosted(newDonut.isFrosted());
             return donutRepo.save(donut);
         });

@@ -15,6 +15,7 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         donutRepo.save(new Donut(1, "Boston Creme", true));
+        donutRepo.save(new Donut(2, "Jelly", false));
 
     }
 }
