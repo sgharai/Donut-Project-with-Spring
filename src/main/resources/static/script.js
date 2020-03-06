@@ -23,10 +23,10 @@ fetch('http://localhost:8080/donuts')
             <td id="${json[el].id}-frosted">
             ${json[el].frosted ? "frosted" : "not frosted"}
             <label class="checkbox">
-            <input id="${json[el].id}-checkbox" type="checkbox" ${json[el].frosted ? "checked" : ""}>
-          </label>
+                <input id="${json[el].id}-checkbox" type="checkbox" ${json[el].frosted ? "checked" : "" } style="visibility: hidden">
+            </label>
             </td>
-            <td id="${json[el].id}-type">${json[el].donutType}</td>
+
             <td><i class="fa fa-trash icon-${json[el].id}" style="cursor:pointer" onclick="deleteItem(${json[el].id})"></i></td>
             <td><i class="fas fa-pencil-alt icon-${json[el].id}" style="cursor:pointer" onclick="updateItem(${json[el].id})"></i></td>
             <td><i class="fas fa-save icon-${json[el].id}" style="cursor:pointer" onclick="saveItem(${json[el].id})"></i></td>`
@@ -46,7 +46,6 @@ const deleteItem = (id) => {
         .then(item.remove())
         .then(console.log(`this works`))
 
-
 }
 
 // update function that will be tied to pencil icon
@@ -55,6 +54,8 @@ const deleteItem = (id) => {
 const updateItem = (id) => {
     let item = document.querySelector(`.row-${id}`)
     item.toggleAttribute("contenteditable")
+    let checkbox = document.getElementById(`${id}-checkbox`)
+    checkbox.style.visibility = "visible"
 
 
 }
