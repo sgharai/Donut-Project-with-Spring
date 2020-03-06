@@ -11,11 +11,13 @@ public class Donut {
     private long id;
     private String name;
     private boolean frosted;
+    private Type DonutType;
 
-    public Donut(long id, String name, boolean frosted) {
+    public Donut(long id, String name, boolean frosted, Type donutType) {
         this.id = id;
         this.name = name;
         this.frosted = frosted;
+        DonutType = donutType;
     }
 
     public long getId() {
@@ -40,6 +42,14 @@ public class Donut {
 
     public void setFrosted(boolean frosted) {
         this.frosted = frosted;
+    }
+
+    public Type getDonutType() {
+        return DonutType;
+    }
+
+    public void setDonutType(Type donutType) {
+        DonutType = donutType;
     }
 
     public Donut(){};

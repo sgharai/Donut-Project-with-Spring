@@ -37,6 +37,7 @@ public class DonutController {
         Optional<Donut> updatedDonut = donutRepo.findById(id).map(donut -> {
             donut.setFrosted(newDonut.isFrosted());
             donut.setName(newDonut.getName());
+            donut.setDonutType(newDonut.getDonutType());
             return donutRepo.save(donut);
         });
         return donutRepo.findById(id);

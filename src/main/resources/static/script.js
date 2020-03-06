@@ -1,14 +1,6 @@
+let url = 'https://glacial-scrubland-78851.herokuapp.com/'
 
-console.log("This script works!")
-
-// .then(json => json.array.forEach(element => {
-//     let tr = document.createElement("tr")
-//     tr.innerHTML = `${element}`
-//     document.querySelzzector(tbody)
-//     tbody.appendChild(tr);
-// }))
-
-fetch('http://localhost:8080/donuts')
+fetch(`${url}donuts`)
     .then(response => response.json())
     .then(json => {
         for (el in json) {
@@ -26,7 +18,7 @@ fetch('http://localhost:8080/donuts')
                 <input id="${json[el].id}-checkbox" type="checkbox" ${json[el].frosted ? "checked" : "" } style="visibility: hidden">
             </label>
             </td>
-
+            <td id="${json[el].id}-type">${json[el].donutType}</td>
             <td><i class="fa fa-trash icon-${json[el].id}" style="cursor:pointer" onclick="deleteItem(${json[el].id})"></i></td>
             <td><i class="fas fa-pencil-alt icon-${json[el].id}" style="cursor:pointer" onclick="updateItem(${json[el].id})"></i></td>
             <td><i class="fas fa-save icon-${json[el].id}" style="cursor:pointer" onclick="saveItem(${json[el].id})"></i></td>`
@@ -40,11 +32,12 @@ fetch('http://localhost:8080/donuts')
 
 const deleteItem = (id) => {
     let item = document.querySelector(`.row-${id}`)
-    fetch(`http://localhost:8080/donut/${id}`, {
+    fetch(`${url}donut/${id}`, {
         method: 'DELETE',
     })
         .then(item.remove())
         .then(console.log(`this works`))
+
 
 }
 
@@ -77,7 +70,7 @@ const saveItem = (id) => {
 
     console.log(sampleDonut)
 
-    fetch(`http://localhost:8080/donut/${id}`, {
+    fetch(`${url}donut/${id}`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -87,6 +80,7 @@ const saveItem = (id) => {
     })
         .then(response => response.json)
         .then(json => console.log(json))
+        .then(location.reload())
 }
 
 
@@ -109,7 +103,7 @@ const addItem = () => {
     }
 
     console.log(sampleDonut)
-    fetch(`http://localhost:8080/donut`, {
+    fetch(`${url}donut`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
